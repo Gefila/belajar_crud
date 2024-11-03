@@ -5,12 +5,17 @@ import Modal from "./Modal";
 import Navbar from "./Navbar";
 import TabelUsers from "./TableUsers";
 import User from "./User";
+import Alert from "./Alert";
 
 export default function PagesUsers() {
 	const [users, setUsers] = useState([]);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [address, setAddress] = useState("");
+    const [alert, setAlert] = useState({
+        message: "",
+        type: "",
+    });
 
 	function resetForm() {
 		setName("");
@@ -42,6 +47,10 @@ export default function PagesUsers() {
 			body: JSON.stringify(newUser),
 		});
 		getUsers();
+        setAlert({
+            message: "User added successfully",
+            type: "success",
+        });
 	}
 
 	async function deleteUser(id) {
@@ -50,6 +59,10 @@ export default function PagesUsers() {
 				method: "DELETE",
 			});
 			getUsers();
+            setAlert({
+                message: "User deleted successfully",
+                type: "success",
+            });
 		} catch (error) {
 			console.error(error);
 		}
@@ -64,6 +77,10 @@ export default function PagesUsers() {
 			body: JSON.stringify(updatedUser),
 		});
 		getUsers();
+        setAlert({
+            message: "User updated successfully",
+            type: "success",
+        });
 	}
 
 	useEffect(() => {
@@ -73,6 +90,7 @@ export default function PagesUsers() {
 	return (
 		<>
 			<Navbar />
+            {alert && <Alert type={alert.type} message={alert.message} setAlert={setAlert}/>}
 			<Modal
 				id="modal-add-user"
 				onClick={() => resetForm()}
