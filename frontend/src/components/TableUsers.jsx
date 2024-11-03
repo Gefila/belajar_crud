@@ -1,10 +1,7 @@
-import User from "./User";
-
-export default function TabelUsers({users, handleDelete}) {
+export default function TabelUsers({ children }) {
 	return (
 		<div className="overflow-x-auto ">
 			<table className="table table-zebra">
-				{/* head */}
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -14,11 +11,7 @@ export default function TabelUsers({users, handleDelete}) {
 						<th>Actions</th>
 					</tr>
 				</thead>
-				<tbody>
-					{users.map((user, index)=>(
-                        <User user={user} key={index} handleDelete={handleDelete}/>
-                    ))}
-				</tbody>
+				<tbody>{children}</tbody>
 			</table>
 		</div>
 	);

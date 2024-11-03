@@ -1,13 +1,15 @@
-export default function Input({ children }) {
+export default function Input({ children, value, onChange }) {
 	return (
 		<>
 			<div className="label">
-				<span className="label-text">{children}</span>
+				<span className="label-text text-lg">{children}</span>
 			</div>
 			<input
 				type="text"
 				placeholder="Type here"
-				className="input input-bordered w-full max-w-xs"
+				className="input input-bordered w-full "
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
 			/>
 		</>
 	);
